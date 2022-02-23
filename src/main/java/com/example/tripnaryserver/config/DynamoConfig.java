@@ -15,15 +15,14 @@ import org.springframework.context.annotation.Configuration;
 @EnableDynamoDBRepositories(basePackages = "com.example.tripnaryserver.repository")
 public class DynamoConfig {
 
-    //Value("${amazon.dynamodb.endpoint}")
-
-    private String endpoint = System.getenv("amazon.dynamodb.endpoint");
-    //@Value("${amazon.aws.region}")
-    private String region = System.getenv("amazon.aws.region");
-    //@Value("${amazon.aws.accesskey}")
-    private String accessKey = System.getenv("amazon.aws.accesskey");
-    //@Value("${amazon.aws.secretkey}")
-    private String secreKey = System.getenv("amazon.aws.secretkey");
+    @Value("${amazon.dynamodb.endpoint}")
+    private String endpoint;
+    @Value("${amazon.aws.region}")
+    private String region;
+    @Value("${amazon.aws.accesskey}")
+    private String accessKey;
+    @Value("${amazon.aws.secretkey}")
+    private String secreKey;
 
     @Bean
     public AmazonDynamoDB amazonDynamoDB(){
