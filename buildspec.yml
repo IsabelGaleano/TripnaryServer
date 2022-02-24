@@ -1,5 +1,10 @@
 version: 0.2
 
+datasource:
+  endpoint: ${endpoint}
+  accesskey: ${accesskey}
+  secretkey: ${secretkey}
+  region: ${region}
 phases:
   build:
     commands:
@@ -12,3 +17,4 @@ artifacts:
   files:
     - target/TripnaryServer.jar
   discard-paths: yes
+
