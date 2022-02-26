@@ -22,8 +22,10 @@ public class DynamoConfig {
     private String region;
     @Value("${amazon.aws.accesskey}")
     private String accessKey;
-    @Value("${ amazon.aws.secretkey}")
+    @Value("${amazon.aws.secretkey}")
     private String secreKey;
+
+    
 
     @Bean
     public AmazonDynamoDB amazonDynamoDB(){
