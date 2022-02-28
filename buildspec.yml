@@ -3,11 +3,6 @@ version: 0.2
 phases:
   build:
     commands:
-      - echo $ENDPOINT_URL
-      - echo $ACCESS_KEY
-      - echo $SECRET_KEY
-      - echo $REGION_CODE
-      - echo $SERVER_PORT
       - echo Entered the build phase...
       - mvn clean package
   post_build:
