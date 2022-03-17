@@ -12,3 +12,4 @@ artifacts:
   files:
     - target/TripnaryServer.jar
   discard-paths: yes
+

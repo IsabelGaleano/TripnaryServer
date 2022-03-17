@@ -6,6 +6,8 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
+import com.example.tripnaryserver.encriptar.Encriptar;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.socialsignin.spring.data.dynamodb.repository.config.EnableDynamoDBRepositories;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -15,14 +17,14 @@ import org.springframework.context.annotation.Configuration;
 @EnableDynamoDBRepositories(basePackages = "com.example.tripnaryserver.repository")
 public class DynamoConfig {
 
-    @Value("${amazon.dynamodb.endpoint}")
+    @Value("${endpoint}")
     private String endpoint;
-    @Value("${amazon.aws.region}")
+    @Value("${region}")
     private String region;
-    @Value("${amazon.aws.accesskey}")
+
     private String accessKey;
-    @Value("${amazon.aws.secretkey}")
     private String secreKey;
+    Encriptar encriptar = new Encriptar();
 
     @Bean
     public AmazonDynamoDB amazonDynamoDB(){
@@ -35,6 +37,9 @@ public class DynamoConfig {
 
     @Bean
     public AWSCredentialsProvider awsCredentialsProvider(){
+        accessKey = encriptar.desencripta("DNLDWGÑHO2IYNNXFHRXW");
+        secreKey = encriptar.desencripta("NlsOhZuBkWXvMwKye6+VKKeRBiVPFu8XoE3Wsy8G");
         return new AWSStaticCredentialsProvider(new BasicAWSCredentials(accessKey, secreKey));
     }
+
 }
