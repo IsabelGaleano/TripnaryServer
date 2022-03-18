@@ -1,27 +1,27 @@
 package com.example.tripnaryserver.service;
 
-import com.example.tripnaryserver.dto.Dia_ViajeDefDto;
-import com.example.tripnaryserver.entity.Dia_ViajeDef;
-import com.example.tripnaryserver.repository.Dia_ViajeDefRepository;
+import com.example.tripnaryserver.dto.DiaViajeDefDto;
+import com.example.tripnaryserver.entity.DiaViajeDef;
+import com.example.tripnaryserver.repository.DiaViajeDefRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class Dia_ViajeDefService {
+public class DiaViajeDefService {
     @Autowired
-    Dia_ViajeDefRepository dia_viajeRepository;
+    DiaViajeDefRepository dia_viajeRepository;
 
-    public Iterable<Dia_ViajeDef> lista() {
+    public Iterable<DiaViajeDef> lista() {
         return dia_viajeRepository.findAll();
     }
 
-    public Dia_ViajeDef getOne(String id_dia) {
+    public DiaViajeDef getOne(String id_dia) {
         return dia_viajeRepository.findById(id_dia).get();
     }
 
-    public Dia_ViajeDef save(Dia_ViajeDefDto dto) {
-        Dia_ViajeDef dia_viaje =
-                Dia_ViajeDef.builder().id_dia("").fecha_dia(dto.getFecha_dia())
+    public DiaViajeDef save(DiaViajeDefDto dto) {
+        DiaViajeDef dia_viaje =
+                DiaViajeDef.builder().fecha_dia(dto.getFecha_dia())
                         .comentarios(dto.getComentarios()).id_viaje(dto.getId_viaje())
                         .estado(dto.getEstado())
                         .build();
@@ -29,8 +29,8 @@ public class Dia_ViajeDefService {
         return dia_viajeRepository.save(dia_viaje);
     }
 
-    public Dia_ViajeDef update(Dia_ViajeDefDto dto) {
-        Dia_ViajeDef dia_viaje = dia_viajeRepository.findById(dto.getId_dia()).get();
+    public DiaViajeDef update(DiaViajeDefDto dto) {
+        DiaViajeDef dia_viaje = dia_viajeRepository.findById(dto.getId_dia()).get();
         dia_viaje.setId_dia(dto.getId_dia());
         dia_viaje.setFecha_dia(dto.getFecha_dia());
         dia_viaje.setComentarios(dto.getComentarios());
@@ -48,7 +48,5 @@ public class Dia_ViajeDefService {
         return dia_viajeRepository.existsById(id_dia);
     }
 
-    public boolean existsNombre(String nombre) {
-        return dia_viajeRepository.existsByNombre(nombre);
-    }
+
 }
