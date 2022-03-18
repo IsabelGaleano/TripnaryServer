@@ -1,39 +1,39 @@
 package com.example.tripnaryserver.Controller;
 
-import com.example.tripnaryserver.dto.Dia_ViajeDefDto;
-import com.example.tripnaryserver.entity.Dia_ViajeDef;
-import com.example.tripnaryserver.service.Dia_ViajeDefService;
+import com.example.tripnaryserver.dto.DiaViajeDefDto;
+import com.example.tripnaryserver.entity.DiaViajeDef;
+import com.example.tripnaryserver.service.DiaViajeDefService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class Dia_ViajeDefController {
+public class DiaViajeDefController {
     @Autowired
-    Dia_ViajeDefService dia_viajeService;
+    DiaViajeDefService dia_viajeService;
 
     @GetMapping("/dia_viajeDef")
-    public ResponseEntity<Iterable<Dia_ViajeDef>> list() {
+    public ResponseEntity<Iterable<DiaViajeDef>> list() {
         return ResponseEntity.ok(dia_viajeService.lista());
     }
 
     @GetMapping("/dia_viajeDef/{id_dia}")
-    public ResponseEntity<Dia_ViajeDef> getOne(@PathVariable("id_dia") String id_dia) {
+    public ResponseEntity<DiaViajeDef> getOne(@PathVariable("id_dia") String id_dia) {
         if (!dia_viajeService.existsId(id_dia))
             return new ResponseEntity("no existe", HttpStatus.NOT_FOUND);
         return ResponseEntity.ok(dia_viajeService.getOne(id_dia));
     }
 
     @PostMapping("/dia_viajeDef")
-    public ResponseEntity<Dia_ViajeDef> create(@RequestBody Dia_ViajeDefDto dia_viajeDto) {
+    public ResponseEntity<DiaViajeDef> create(@RequestBody DiaViajeDefDto dia_viajeDto) {
         if (dia_viajeService.existsId(dia_viajeDto.getId_dia()))
             return new ResponseEntity("el id ya existe", HttpStatus.BAD_REQUEST);
         return ResponseEntity.ok(dia_viajeService.save(dia_viajeDto));
     }
 
     @PutMapping("/dia_viajeDef")
-    public ResponseEntity<Dia_ViajeDef> update(@RequestBody Dia_ViajeDefDto dia_viajeDto) {
+    public ResponseEntity<DiaViajeDef> update(@RequestBody DiaViajeDefDto dia_viajeDto) {
         if (!dia_viajeService.existsId(dia_viajeDto.getId_dia()))
             return new ResponseEntity("no existe", HttpStatus.NOT_FOUND);
         return ResponseEntity.ok(dia_viajeService.update(dia_viajeDto));
