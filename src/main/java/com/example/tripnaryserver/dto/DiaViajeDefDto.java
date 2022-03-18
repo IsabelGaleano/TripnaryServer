@@ -9,7 +9,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Dia_ViajeDefDto {
+public class DiaViajeDefDto {
     private String id_dia;
     private Date fecha_dia;
     private String comentarios;

@@ -20,7 +20,7 @@ public class LugarDefService {
 
     public LugarDef save(LugarDefDto dto){
         LugarDef lugar =
-                LugarDef.builder().id_lugar("").nombre(dto.getNombre())
+                LugarDef.builder().nombre(dto.getNombre())
                         .hora(dto.getHora()).comentarios(dto.getComentarios()).id_dia(dto.getId_dia())
                         .estado(dto.getEstado())
                         .build();
