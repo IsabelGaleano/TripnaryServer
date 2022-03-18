@@ -1,6 +1,7 @@
 package com.example.tripnaryserver.service;
 
 import com.example.tripnaryserver.dto.DiaViajeDefDto;
+import com.example.tripnaryserver.entity.CodigoDef;
 import com.example.tripnaryserver.entity.DiaViajeDef;
 import com.example.tripnaryserver.repository.DiaViajeDefRepository;
 import org.springframework.beans.factory.annotation.Autowired;
