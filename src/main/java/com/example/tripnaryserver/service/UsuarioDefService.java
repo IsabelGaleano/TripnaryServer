@@ -59,9 +59,9 @@ public class UsuarioDefService {
         return usuarioRepository.existsByNombre(nombre);
     }
 
-    public ErrorMessage getError() {
+    public ErrorMessage getError(int tipo) {
         ErrorMessage errorMessage = new ErrorMessage();
-        errorMessage.setMessage("No existe el usuario");
+        errorMessage.setMessageError(tipo);
         return errorMessage;
     }
 }

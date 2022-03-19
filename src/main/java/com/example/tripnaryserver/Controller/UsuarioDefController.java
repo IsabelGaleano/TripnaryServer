@@ -26,30 +26,30 @@ public class UsuarioDefController {
     @GetMapping("/usuarioDef/{idUsuario}")
     public ResponseEntity<UsuarioDef> getOne(@PathVariable("idUsuario") String idUsuario){
         if(!usuarioService.existsId(idUsuario))
-            return new ResponseEntity(usuarioService.getError(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity(usuarioService.getError(1), HttpStatus.NOT_FOUND);
         return ResponseEntity.ok(usuarioService.getOne(idUsuario));
     }
 
     @PostMapping("/usuarioDef")
     public ResponseEntity<UsuarioDef> create(@RequestBody UsuarioDefDto usuarioDto){
         if(usuarioService.existsId(usuarioDto.getCorreoElectronico()))
-            return new ResponseEntity("el id ya existe", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(usuarioService.getError(2), HttpStatus.BAD_REQUEST);
         return ResponseEntity.ok(usuarioService.save(usuarioDto));
     }
 
     @PutMapping("/usuarioDef")
     public ResponseEntity<UsuarioDef> update(@RequestBody UsuarioDefDto usuarioDto){
         if(!usuarioService.existsId(usuarioDto.getCorreoElectronico()))
-            return new ResponseEntity("no existe", HttpStatus.NOT_FOUND);
+            return new ResponseEntity(usuarioService.getError(1), HttpStatus.NOT_FOUND);
         return ResponseEntity.ok(usuarioService.update(usuarioDto));
     }
 
     @DeleteMapping("/usuarioDef/{idUsuario}")
     public ResponseEntity<?> delete(@PathVariable("idUsuario") String idUsuario){
         if(!usuarioService.existsId(idUsuario))
-            return new ResponseEntity("no existe", HttpStatus.NOT_FOUND);
+            return new ResponseEntity(usuarioService.getError(1), HttpStatus.NOT_FOUND);
         usuarioService.delete(idUsuario);
-        return new ResponseEntity("usuario eliminado", HttpStatus.OK);
+        return new ResponseEntity(usuarioService.getError(3), HttpStatus.OK);
     }
 
 }

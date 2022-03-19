@@ -22,29 +22,29 @@ public class LugarDefController {
     @GetMapping("/lugarDef/{id_lugar}")
     public ResponseEntity<LugarDef> getOne(@PathVariable("id_lugar") String id_lugar){
         if(!lugarService.existsId(id_lugar))
-            return new ResponseEntity("no existe", HttpStatus.NOT_FOUND);
+            return new ResponseEntity(lugarService.getError(1), HttpStatus.NOT_FOUND);
         return ResponseEntity.ok(lugarService.getOne(id_lugar));
     }
 
     @PostMapping("/lugarDef")
     public ResponseEntity<LugarDef> create(@RequestBody LugarDefDto lugarDto){
         if(lugarService.existsId(lugarDto.getId_lugar()))
-            return new ResponseEntity("el id ya existe", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(lugarService.getError(2), HttpStatus.BAD_REQUEST);
         return ResponseEntity.ok(lugarService.save(lugarDto));
     }
 
     @PutMapping("/lugarDef")
     public ResponseEntity<LugarDef> update(@RequestBody LugarDefDto lugarDto){
         if(!lugarService.existsId(lugarDto.getId_lugar()))
-            return new ResponseEntity("no existe", HttpStatus.NOT_FOUND);
+            return new ResponseEntity(lugarService.getError(1), HttpStatus.NOT_FOUND);
         return ResponseEntity.ok(lugarService.update(lugarDto));
     }
 
     @DeleteMapping("/lugarDef/{id_lugar}")
     public ResponseEntity<?> delete(@PathVariable("id_lugar") String id_lugar){
         if(!lugarService.existsId(id_lugar))
-            return new ResponseEntity("no existe", HttpStatus.NOT_FOUND);
+            return new ResponseEntity(lugarService.getError(1), HttpStatus.NOT_FOUND);
         lugarService.delete(id_lugar);
-        return new ResponseEntity("lugar eliminado", HttpStatus.OK);
+        return new ResponseEntity(lugarService.getError(3), HttpStatus.OK);
     }
 }

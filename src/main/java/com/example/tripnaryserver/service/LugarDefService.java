@@ -2,6 +2,7 @@ package com.example.tripnaryserver.service;
 
 import com.example.tripnaryserver.dto.LugarDefDto;
 import com.example.tripnaryserver.entity.LugarDef;
+import com.example.tripnaryserver.exception.ErrorMessage;
 import com.example.tripnaryserver.repository.LugarDefRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,5 +51,11 @@ public class LugarDefService {
 
     public boolean existsNombre(String nombre){
         return lugarRepository.existsByNombre(nombre);
+    }
+
+    public ErrorMessage getError(int tipo) {
+        ErrorMessage errorMessage = new ErrorMessage();
+        errorMessage.setMessageError(tipo);
+        return errorMessage;
     }
 }

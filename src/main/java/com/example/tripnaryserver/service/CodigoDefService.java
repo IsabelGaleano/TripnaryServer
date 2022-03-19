@@ -51,7 +51,11 @@ public class CodigoDefService {
         return codigoRepository.existsById(idCodigo);
     }
 
-
+    public ErrorMessage getError(int tipo) {
+        ErrorMessage errorMessage = new ErrorMessage();
+        errorMessage.setMessageError(tipo);
+        return errorMessage;
+    }
 
 
 }
