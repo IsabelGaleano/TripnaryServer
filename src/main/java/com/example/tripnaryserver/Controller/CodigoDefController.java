@@ -25,29 +25,29 @@ public class CodigoDefController {
     @GetMapping("/codigoDef/{idCodigo}")
     public ResponseEntity<CodigoDef> getOne(@PathVariable("idCodigo") String idCodigo){
         if(!codigoService.existsId(idCodigo))
-            return new ResponseEntity("no existe", HttpStatus.NOT_FOUND);
+            return new ResponseEntity(codigoService.getError(1), HttpStatus.NOT_FOUND);
         return ResponseEntity.ok(codigoService.getOne(idCodigo));
     }
 
     @PostMapping("/codigoDef")
     public ResponseEntity<CodigoDef> create(@RequestBody CodigoDefDto codigoDefDto){
         if(codigoService.existsId(codigoDefDto.getIdCodigo()))
-            return new ResponseEntity("el id ya existe", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(codigoService.getError(2), HttpStatus.BAD_REQUEST);
         return ResponseEntity.ok(codigoService.save(codigoDefDto));
     }
 
     @PutMapping("/codigoDef")
     public ResponseEntity<CodigoDef> update(@RequestBody CodigoDefDto codigoDefDto){
         if(!codigoService.existsId(codigoDefDto.getIdCodigo()))
-            return new ResponseEntity("no existe", HttpStatus.NOT_FOUND);
+            return new ResponseEntity(codigoService.getError(1), HttpStatus.NOT_FOUND);
         return ResponseEntity.ok(codigoService.update(codigoDefDto));
     }
 
     @DeleteMapping("/codigoDef/{idCodigo}")
     public ResponseEntity<?> delete(@PathVariable("idCodigo") String idCodigo){
         if(!codigoService.existsId(idCodigo))
-            return new ResponseEntity("no existe", HttpStatus.NOT_FOUND);
+            return new ResponseEntity(codigoService.getError(1), HttpStatus.NOT_FOUND);
         codigoService.delete(idCodigo);
-        return new ResponseEntity("codigo eliminado", HttpStatus.OK);
+        return new ResponseEntity(codigoService.getError(3), HttpStatus.OK);
     }
 }
