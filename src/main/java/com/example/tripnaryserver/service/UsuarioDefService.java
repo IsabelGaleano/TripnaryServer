@@ -5,6 +5,7 @@ import com.example.tripnaryserver.dto.UsuarioDto;
 import com.example.tripnaryserver.entity.Direccion;
 import com.example.tripnaryserver.entity.Usuario;
 import com.example.tripnaryserver.entity.UsuarioDef;
+import com.example.tripnaryserver.exception.ErrorMessage;
 import com.example.tripnaryserver.repository.UsuarioDefRepository;
 import com.example.tripnaryserver.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,5 +57,11 @@ public class UsuarioDefService {
 
     public boolean existsNombre(String nombre){
         return usuarioRepository.existsByNombre(nombre);
+    }
+
+    public ErrorMessage getError(int tipo) {
+        ErrorMessage errorMessage = new ErrorMessage();
+        errorMessage.setMessageError(tipo);
+        return errorMessage;
     }
 }
