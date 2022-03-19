@@ -5,6 +5,7 @@ import com.example.tripnaryserver.dto.UsuarioDefDto;
 import com.example.tripnaryserver.entity.CodigoDef;
 import com.example.tripnaryserver.entity.Usuario;
 import com.example.tripnaryserver.entity.UsuarioDef;
+import com.example.tripnaryserver.exception.ErrorMessage;
 import com.example.tripnaryserver.repository.CodigoDefRepository;
 import com.example.tripnaryserver.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,8 @@ public class CodigoDefService {
     public boolean existsId(String idCodigo){
         return codigoRepository.existsById(idCodigo);
     }
+
+
 
 
 }
