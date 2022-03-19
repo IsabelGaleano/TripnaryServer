@@ -26,7 +26,7 @@ public class UsuarioDefController {
     @GetMapping("/usuarioDef/{idUsuario}")
     public ResponseEntity<UsuarioDef> getOne(@PathVariable("idUsuario") String idUsuario){
         if(!usuarioService.existsId(idUsuario))
-            return new ResponseEntity("no existe", HttpStatus.NOT_FOUND);
+            return new ResponseEntity(usuarioService.getError(), HttpStatus.NOT_FOUND);
         return ResponseEntity.ok(usuarioService.getOne(idUsuario));
     }
 
