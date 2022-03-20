@@ -1,5 +1,6 @@
 package com.example.tripnaryserver.dto;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,10 +11,11 @@ import java.sql.Date;
 @AllArgsConstructor
 @Data
 public class ViajeDefDto {
-    private String id_viaje;
+
+    private String idViaje;
     private String descripcion;
-    private Date fechaInicio;
-    private Date fechaFin;
+    private String fechaInicio;
+    private String fechaFin;
     private String destino;
     private String idUsuario;
     private String estado;
