@@ -32,6 +32,7 @@ public class UsuarioDefController {
 
     @PostMapping("/usuarioDef")
     public ResponseEntity<UsuarioDef> create(@RequestBody UsuarioDefDto usuarioDto){
+        usuarioDto.setContrasenna(usuarioDto.encriptacionMD5Java(usuarioDto.getContrasenna()));
         if(usuarioService.existsId(usuarioDto.getCorreoElectronico()))
             return new ResponseEntity(usuarioService.getError(2), HttpStatus.BAD_REQUEST);
         return ResponseEntity.ok(usuarioService.save(usuarioDto));
