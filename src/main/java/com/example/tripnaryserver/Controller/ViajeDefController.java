@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin
 @RestController
 public class ViajeDefController {
@@ -47,4 +49,13 @@ public class ViajeDefController {
         viajeService.delete(idViaje);
         return new ResponseEntity(viajeService.getError(3), HttpStatus.OK);
     }
+
+    @GetMapping("/viajeDef/getByUser/{idUsuario}")
+    public List<ViajeDef> getByUser(@PathVariable("idUsuario") String idUsuario){
+
+        return viajeService.getByUser(idUsuario);
+    }
+
+
+
 }

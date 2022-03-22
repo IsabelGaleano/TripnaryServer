@@ -7,6 +7,10 @@ import com.example.tripnaryserver.repository.ViajeDefRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.function.Consumer;
+
 @Service
 public class ViajeDefService {
     @Autowired
@@ -55,5 +59,10 @@ public class ViajeDefService {
         errorMessage.setMessageError(tipo);
         return errorMessage;
     }
+
+    public List<ViajeDef> getByUser(String idUsuario) {
+       return viajeRepository.findViajeDefByIdUsuario(idUsuario);
+    }
+
 
 }
