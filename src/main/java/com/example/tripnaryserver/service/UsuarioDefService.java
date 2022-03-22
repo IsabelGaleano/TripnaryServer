@@ -5,11 +5,14 @@ import com.example.tripnaryserver.dto.UsuarioDto;
 import com.example.tripnaryserver.entity.Direccion;
 import com.example.tripnaryserver.entity.Usuario;
 import com.example.tripnaryserver.entity.UsuarioDef;
+import com.example.tripnaryserver.entity.ViajeDef;
 import com.example.tripnaryserver.exception.ErrorMessage;
 import com.example.tripnaryserver.repository.UsuarioDefRepository;
 import com.example.tripnaryserver.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UsuarioDefService {
@@ -64,4 +67,5 @@ public class UsuarioDefService {
         errorMessage.setMessageError(tipo);
         return errorMessage;
     }
+
 }
