@@ -5,11 +5,14 @@ import com.example.tripnaryserver.dto.UsuarioDefDto;
 import com.example.tripnaryserver.entity.CodigoDef;
 import com.example.tripnaryserver.entity.Usuario;
 import com.example.tripnaryserver.entity.UsuarioDef;
+import com.example.tripnaryserver.entity.ViajeDef;
 import com.example.tripnaryserver.exception.ErrorMessage;
 import com.example.tripnaryserver.repository.CodigoDefRepository;
 import com.example.tripnaryserver.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CodigoDefService {
@@ -56,6 +59,8 @@ public class CodigoDefService {
         errorMessage.setMessageError(tipo);
         return errorMessage;
     }
-
+    public List<CodigoDef> getByCorreo(String idUsuario) {
+        return codigoRepository.findCodigoDefByIdUsuario(idUsuario);
+    }
 
 }

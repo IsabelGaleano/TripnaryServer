@@ -1,15 +1,24 @@
 package com.example.tripnaryserver.Controller;
 
 import com.example.tripnaryserver.dto.UsuarioDefDto;
-import com.example.tripnaryserver.dto.UsuarioDto;
-import com.example.tripnaryserver.entity.Usuario;
+import com.example.tripnaryserver.entity.CodigoDef;
 import com.example.tripnaryserver.entity.UsuarioDef;
+import com.example.tripnaryserver.sendgrid.SendEmail;
+import com.example.tripnaryserver.service.CodigoDefService;
 import com.example.tripnaryserver.service.UsuarioDefService;
-import com.example.tripnaryserver.service.UsuarioService;
+import com.sendgrid.Method;
+import com.sendgrid.Request;
+import com.sendgrid.Response;
+import com.sendgrid.SendGrid;
+import com.sendgrid.helpers.mail.Mail;
+import com.sendgrid.helpers.mail.objects.Content;
+import com.sendgrid.helpers.mail.objects.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -32,9 +41,10 @@ public class UsuarioDefController {
 
     @PostMapping("/usuarioDef")
     public ResponseEntity<UsuarioDef> create(@RequestBody UsuarioDefDto usuarioDto){
-        usuarioDto.setContrasenna(usuarioDto.encriptacionMD5Java(usuarioDto.getContrasenna()));
-        if(usuarioService.existsId(usuarioDto.getCorreoElectronico()))
+        if(usuarioService.existsId(usuarioDto.getCorreoElectronico())){
             return new ResponseEntity(usuarioService.getError(2), HttpStatus.BAD_REQUEST);
+        }
+        usuarioDto.setContrasenna(usuarioDto.encriptacionMD5Java(usuarioDto.getContrasenna()));
         return ResponseEntity.ok(usuarioService.save(usuarioDto));
     }
 
