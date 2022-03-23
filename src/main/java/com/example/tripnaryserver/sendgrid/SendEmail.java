@@ -12,6 +12,9 @@ import com.sendgrid.helpers.mail.objects.Personalization;
 import java.io.IOException;
 
 public class SendEmail {
+
+    private Response responseResult;
+
     public void correoVerificacionUsuario(int codigo, String correo){
 //        Email from = new Email("david@rodriguezcoto.com");
 //        String subject = " ";
