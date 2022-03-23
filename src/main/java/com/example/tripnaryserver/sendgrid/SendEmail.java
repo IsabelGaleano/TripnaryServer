@@ -9,22 +9,31 @@ import com.sendgrid.SendGrid;
 import com.sendgrid.helpers.mail.Mail;
 import com.sendgrid.helpers.mail.objects.Content;
 import com.sendgrid.helpers.mail.objects.Email;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class SendEmail {
+
+    private Response responseResult;
+
     public void correoVerificacionUsuario(int codigo, String correo){
-        Email from = new Email("lgaleanoh@ucenfotec.ac.cr");
+        Email from = new Email("tripnaryp@gmail.com");
         String subject = "Prueba";
         Email to = new Email(correo);
         Content content = new Content("text/plain", "Código es: " + codigo);
         Mail mail = new Mail(from, subject, to, content);
-        SendGrid sg = new SendGrid("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");
+        SendGrid sg = new SendGrid("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");
         Request request = new Request();
         try {
             request.setMethod(Method.POST);
             request.setEndpoint("mail/send");
             request.setBody(mail.build());
             Response response = sg.api(request);
-            System.out.println(response.getStatusCode());
+            this.responseResult = response;
         } catch (Exception e) {
             e.printStackTrace();
         }
