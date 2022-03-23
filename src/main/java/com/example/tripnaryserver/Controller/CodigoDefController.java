@@ -5,8 +5,16 @@ import com.example.tripnaryserver.dto.UsuarioDefDto;
 import com.example.tripnaryserver.entity.CodigoDef;
 import com.example.tripnaryserver.entity.UsuarioDef;
 import com.example.tripnaryserver.entity.ViajeDef;
+import com.example.tripnaryserver.sendgrid.SendEmail;
 import com.example.tripnaryserver.service.CodigoDefService;
 import com.example.tripnaryserver.service.UsuarioDefService;
+import com.sendgrid.Method;
+import com.sendgrid.Request;
+import com.sendgrid.Response;
+import com.sendgrid.SendGrid;
+import com.sendgrid.helpers.mail.Mail;
+import com.sendgrid.helpers.mail.objects.Content;
+import com.sendgrid.helpers.mail.objects.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +44,8 @@ public class CodigoDefController {
     public ResponseEntity<CodigoDef> create(@RequestBody CodigoDefDto codigoDefDto){
         if(codigoService.existsId(codigoDefDto.getIdCodigo()))
             return new ResponseEntity(codigoService.getError(2), HttpStatus.BAD_REQUEST);
+        SendEmail sendEmail = new SendEmail();
+        sendEmail.correoVerificacionUsuario(codigoDefDto.getCodigo(), codigoDefDto.getIdUsuario());
         return ResponseEntity.ok(codigoService.save(codigoDefDto));
     }
 

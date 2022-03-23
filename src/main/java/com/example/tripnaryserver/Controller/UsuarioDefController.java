@@ -1,11 +1,11 @@
 package com.example.tripnaryserver.Controller;
 
 import com.example.tripnaryserver.dto.UsuarioDefDto;
-import com.example.tripnaryserver.dto.UsuarioDto;
-import com.example.tripnaryserver.entity.Usuario;
+import com.example.tripnaryserver.entity.CodigoDef;
 import com.example.tripnaryserver.entity.UsuarioDef;
+import com.example.tripnaryserver.sendgrid.SendEmail;
+import com.example.tripnaryserver.service.CodigoDefService;
 import com.example.tripnaryserver.service.UsuarioDefService;
-import com.example.tripnaryserver.service.UsuarioService;
 import com.sendgrid.Method;
 import com.sendgrid.Request;
 import com.sendgrid.Response;
@@ -18,7 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -41,28 +41,10 @@ public class UsuarioDefController {
 
     @PostMapping("/usuarioDef")
     public ResponseEntity<UsuarioDef> create(@RequestBody UsuarioDefDto usuarioDto){
-        usuarioDto.setContrasenna(usuarioDto.encriptacionMD5Java(usuarioDto.getContrasenna()));
         if(usuarioService.existsId(usuarioDto.getCorreoElectronico())){
             return new ResponseEntity(usuarioService.getError(2), HttpStatus.BAD_REQUEST);
         }
-        Email from = new Email("david@rodriguezcoto.com");
-        String subject = "Prueba";
-        Email to = new Email(usuarioDto.getCorreoElectronico());
-        Content content = new Content("text/plain", "and easy to do anywhere, even with Java");
-        Mail mail = new Mail(from, subject, to, content);
-        SendGrid sg = new SendGrid("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");
-        Request request = new Request();
-        try {
-            request.setMethod(Method.POST);
-            request.setEndpoint("mail/send");
-            request.setBody(mail.build());
-            Response response = sg.api(request);
-            System.out.println(response.getStatusCode());
-            System.out.println(response.getBody());
-            System.out.println(response.getHeaders());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        usuarioDto.setContrasenna(usuarioDto.encriptacionMD5Java(usuarioDto.getContrasenna()));
         return ResponseEntity.ok(usuarioService.save(usuarioDto));
     }
 
