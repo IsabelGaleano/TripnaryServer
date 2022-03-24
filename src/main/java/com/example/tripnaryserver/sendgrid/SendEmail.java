@@ -1,5 +1,6 @@
 package com.example.tripnaryserver.sendgrid;
 
+import com.example.tripnaryserver.encriptar.Encriptar;
 import com.sendgrid.Method;
 import com.sendgrid.Request;
 import com.sendgrid.Response;
@@ -13,8 +14,7 @@ import java.io.IOException;
 
 public class SendEmail {
 
-    private Response responseResult;
-
+    private Encriptar encriptar;
     public void correoVerificacionUsuario(int codigo, String correo){
 //        Email from = new Email("david@rodriguezcoto.com");
 //        String subject = " ";
@@ -37,9 +37,9 @@ public class SendEmail {
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
-        String templateId = "d-09125658c35f47e4a48ab15086648107";
+        String templateId = "d-708a8389bb764fc8b2566d28ba78a19e";
         Mail mail = new Mail();
-        mail.setFrom(new Email("david@rodriguezcoto.com", "Tripnary"));
+        mail.setFrom(new Email("dcoto37@gmail.com", "Tripnary"));
         mail.setTemplateId(templateId);
         Personalization personalization = new Personalization();
         personalization.addDynamicTemplateData("header", codigo);
@@ -48,7 +48,8 @@ public class SendEmail {
         sendInternal(mail);
     }
     private void sendInternal(Mail mail) {
-        SendGrid sg = new SendGrid("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");
+        encriptar = new Encriptar();
+        SendGrid sg = new SendGrid(encriptar.desencripta("VJ.Ñ86z0oVUTmiKe5kbF5Y53g.ikV2SWm989rIK7ZDVyssxKj3YXwzAFZ7O3hj_eX8-SH"));
         Request request = new Request();
         try {
             request.setMethod(Method.POST);
