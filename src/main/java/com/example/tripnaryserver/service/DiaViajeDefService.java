@@ -3,10 +3,13 @@ package com.example.tripnaryserver.service;
 import com.example.tripnaryserver.dto.DiaViajeDefDto;
 import com.example.tripnaryserver.entity.CodigoDef;
 import com.example.tripnaryserver.entity.DiaViajeDef;
+import com.example.tripnaryserver.entity.ViajeDef;
 import com.example.tripnaryserver.exception.ErrorMessage;
 import com.example.tripnaryserver.repository.DiaViajeDefRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class DiaViajeDefService {
@@ -55,5 +58,6 @@ public class DiaViajeDefService {
         errorMessage.setMessageError(tipo);
         return errorMessage;
     }
+
 
 }

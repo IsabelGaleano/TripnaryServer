@@ -2,11 +2,14 @@ package com.example.tripnaryserver.Controller;
 
 import com.example.tripnaryserver.dto.DiaViajeDefDto;
 import com.example.tripnaryserver.entity.DiaViajeDef;
+import com.example.tripnaryserver.entity.ViajeDef;
 import com.example.tripnaryserver.service.DiaViajeDefService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -47,4 +50,5 @@ public class DiaViajeDefController {
         dia_viajeService.delete(id_dia);
         return new ResponseEntity(dia_viajeService.getError(3), HttpStatus.OK);
     }
+
 }
